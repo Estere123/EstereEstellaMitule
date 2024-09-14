@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header><strong>Estere Estella Mitule</strong>
+        <nav>
+            <ul>
+                <li><a href="#aboutme">About me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+    <h2>About me</h2>
+    <article>Psychology; Skills: SPSS, statistics, soft skills, reaserch
+        Bio: Just starting my career, I have worked as a teacher in summer swimming camps
+    </article>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <article>
+            <h1>The main coordinator of Psychology Days 2023</h1><img src="images1/es.jpg">
+            <a href="http://www.facebook.com/PsihologuDienas">PsychologyDays</a>
+</article>
+
+<article>
+    <h1>Second Project</h1>
+    I really do not have anything else to write, so here is the picture of a cat.
+    <img src="images1/cat.jpeg">
+</article>
+    </section>
+
+    <section>
+    <h2>Contacts </h2>
+    <article>estere.mitule@gmail.com
+    <a href="http://www.linkedin.com/in/estere-mitule44">linkedin</a></article> 
+</section>
+
+    <section> 
+        <h2>Form</h2>
+        <form>
+            <label for="Name">Name:</label>
+            <input type="text" id="Name"required>
+
+            <label for="email">Email</label>
+            <input type="email" name="email" required>
+
+            <label for="Phone number">Phone Number</label>
+            <input type="text" id="Phone" required>
+
+            <label for="Subject">Subject</label>
+            <input type="text" id="Subject" required>
+
+            <label for="Message">Message</label>
+            <input type="text" id="Message" required>
+
+            <div class="custom-select" style="width:200px;">
+                <select>
+                    <option value="0">Select contact form:</option>
+                    <option value="1"> Phone </option>
+                    <option value="2">Email</option>
+                </select>
+            </div>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset"> 
+        </form>
+    </section>
+
+    <footer>Thank you for the visiting!</footer>
+</body>
+</html>
