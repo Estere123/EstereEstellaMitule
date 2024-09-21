@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+    
+body{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #d9d6d6;
+    margin: 0;
+    padding: 0;
+    container{
+        text-align: center;
+        max-width: 600px;
+        padding: 0 auto;
+        background-color: #dedada;
+        border-radius: 0%;
+        box-shadow: 10px 10px #444;
+    }
+}
+
+header{
+    background-color: #0c0c0c;
+    text-emphasis-color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+header h1{
+    color: white;
+    font-size: medium;
+}
+
+nav{
+    background-color: #444;
+    padding: 10px;
+    text-align: center;
+}
+    nav ul{
+        list-style-type:none;
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+    }
+
+    nav ul li{
+        display: inline-block;
+        margin-right: 10px;
+    }
+    nav ul li:last-child{
+        margin-right: 0;
+    }
+   nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 5px;
+   }
+    nav ul li a:hover{
+        background-color: #555;
+    }
+main{
+    padding: 5px;
+    }
+    section{
+        background-color: #fff;
+        padding: 5px;
+        margin: 20px 10px;
+    }
+section h2{
+    border-bottom: 1px solid #0c0c0c;
+}
+form{
+    padding: 10%;
+    width: 100%;
+    max-width: 500px ;
+    margin: 20px auto 0;
+    font-size: small;
+    background-color: #efececf3;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0,1);
+}
+label{
+    display: block;
+    margin: 5px auto 0;
+    font-weight: bold;
+    align-items: center;
+}
+input[type="text"],
+input[type="email"],
+textarea{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+ textarea{
+    height: 100px;
+    resize: vertical;
+ }
+
+button{
+    width: 100%;
+    background-color: #36b90bf3;
+    padding: 12px;
+    border-radius: 5px;
+}
+button:hover 
+{background-color: aqua;
+}
+footer{
+    background-color: #0c0c0c;
+    text-align: center;
+    font-size: smaller;
+    position: fixed;
+    bottom: 10px;
+    right: 5px;
+    left: 5px;
+    width: 100%;    
+}
+footer p{
+    color: #fff;
+    margin: 0;
+}
