@@ -1,0 +1,29 @@
+h1, h2{color; red;
+margin: 5px; 10px;
+
+}
+p{}
+
+class selector-allowa simoutesly target diffrent HTML elements 
+ID selector=allows target a specific element by its id attribute 
+
+subrules
+
+Attribute selectors
+
+
+pseudoclass
+a: link
+a: visited
+
+Pseudelements
+:first child
+
+div h2 {color:red;}
+
+
+Box model
+
+
+
+
