@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+    <title>Responsive Web design</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="boxheader">
+            <div class="headericons">
+            <i class="fa-solid fa-circle-info"></i>
+            <i class="fa-regular fa-bell"></i>
+            <img src="images/personpicture.jpg" alt="personpicture">
+        </div>
+        </div>
+        <nav>
+            <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#Audiance">Audiance</a></li>
+            <li><a href="#Behaviour">Behaviour</a></li>
+            <li><a href="Conversations">Conversations</a></li>
+            </ul>
+            <div class="nav-customize">
+            <li><a href="Customize">Customize</a></li>
+        </div>
+        </nav>
+        <div class="wrapper" style="display: grid; grid-template-columns: 2fr 1fr; grid-gap: 20px;">
+        <div class="grid">
+        <div class="content1">
+            <div class="Activeusers">
+                <h1>Active Users</h1>
+                <p>72</p>
+                <a href="#">VIEW REFERRALS →</a>
+            </div>
+            <div class="Useractivitygraph">
+                <span class="placeholder">Chart is only for demonstriation purpose</span>
+                <h7>Page views per minutes</h7>
+                <div id="chart1">
+                    <table class="charts-css column column show-data-on-hover data-spacing-5 show-heading hide-data">
+                      <tbody>
+                      <tr>
+                        <td style="--size: 0.4"> 
+                        <span class="data"> 1</span> 
+                        <span class="tooltip">1 page views<br>3 minutes ago</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="--size: 0.5"> 
+                        <span class="data"> 5 </span>
+                        <span class="tooltip">5 page views<br>3 minutes ago</span>
+                     </td>
+                      </tr>
+                      <tr>
+                        <td style="--size: 0.8"> 
+                        <span class="data"> 8 </span>
+                        <span class="tooltip">8 page view<br>3 minutes ago</span> 
+                     </td>
+                      </tr>
+                      <tr>
+                        <td style="--size: 0.9"> 
+                        <span class="data"> 9 </span>
+                        <span class="tooltip">9 page view<br>3 minutes ago</span> 
+                     </td>
+                      </tr>
+                      <tr>
+                        <td style="--size: 0.95"> 
+                        <span class="data"> 10 </span>
+                        <span class="tooltip">10 page view<br>3 minutes ago</span> 
+                     </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#">VIEW REFERRALS →</a>
+            </div>
+            
+        </div>
+        <div class="fourcards">
+            <div class="card1">
+                <div class="card-header">
+                <span class="metric-name">Users</span>
+                <span class="change positive"><i class="fa-solid fa-arrow-up"></i>268%</span>
+            </div>
+                <span class="value">15K</span>
+            </div>
+            <div class="card2">
+                <div class="card-header">
+                <span class="metric-name">Sessions</span>
+                <span class="change positive"><i class="fa-solid fa-arrow-up"></i>268%</span>
+            </div>
+                <span class="value">17K</span>
+            </div>
+            <div class="card3">
+                <div class="card-header">
+                <span class="metric-name">Bounce Rate</span>
+                <span class="change-positive-red"><i class="fa-solid fa-arrow-up"></i>19.6%</span>
+                </div>
+                <span class="value">62.57%</span>
+            </div>
+            <div class="card4">
+            <div class="card-header">
+            <span class="metric-name">Session Duration</span>
+            <span class="change-negative-red"><i class="fa-solid fa-arrow-down"></i>29.7%</span>
+        </div>
+        <span class="value">1m 37s</span>
+            </div>
+        </div>
+        <div class="Alertcard">
+            <i class="fa-regular fa-bell"></i>
+            <div class="Alerttextbox">
+            <h2>No alerts set</h2>
+            <p>Get notified when your data drastically change</p>
+        </div>
+            <button>Set alert</button>
+        </div>
+
+        <div class="devices">
+        <div class="devices1">
+        <h3>Devices</h3>
+        <span class="placeholder">Chart is only for demonstriation purpose</span>
+            <ul class="months">
+                <li class="tab">May</li>
+                <li class="tab">June</li>
+                <li class="tab">July</li>
+                <li class="tab">August</li>
+            </ul>
+        
+        <div id="chart2">
+        <table class="charts-css bar show-labels data-spacing-5">
+    <tbody>
+        <tr>
+            <th scope="row">Desktop|52%</th>
+            <td style="--size: 0.52">52</td>
+       </tr>
+    </tbody>
+    <tr>
+        <th scope="row">Tablet|15%</th>
+        <td style="--size: 0.15">15</td>
+   </tr>
+   <tr>
+    <th scope="row">Mobile|36%</th>
+    <td style="--size: 0.36">36</td>
+</tr>
+        </table>
+        </div>
+
+    </div>
+        <div class="devices2">
+            <div class="devices2header">
+            <h4>Devices<i class="fa-solid fa-ellipsis-vertical"></i></h4>
+        </div>
+            <ul>
+                <li>Direct<span>24</span></li>
+                <li>Organic<span>14</span></li>
+                <li>Social<span>5</span></li>
+                <li>Referreal<span>5</span></li>
+                <li>Social<span>2</span></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <aside class="sidebar">
+        <table>
+            <thead>
+                <tr>
+                <th>Top pages</th>
+                <th>Visits</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/</td>
+                    <td>23,956</td>
+                </tr>
+                <tr>
+                    <td>/About</td>
+                    <td>565</td>
+                </tr>
+                <tr>
+                    <td>/License</td>
+                    <td>477</td>
+                </tr>
+                <tr>
+                    <td>/posts/sketch-help-ce</td>
+                    <td>458</td>
+                </tr>
+                <tr>
+                    <td>/posts/sketch..n-cards</td>
+                    <td>447</td>
+                </tr>
+                <tr>
+                    <td>/posts/sketch..n-cards</td>
+                    <td>785</td>
+                </tr>
+                <tr>
+                    <td>/posts/sketch-progress-bar</td>
+                    <td>962</td>
+                </tr>
+                <tr>
+                    <td>/posts/sketch-messages</td>
+                    <td>558</td>
+                </tr>
+                <tr>
+                    <td>/posts/sketch-discount</td>
+                    <td>486</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="bluebox">
+            <h5>More stats<i class="fas fa-greater-than"></i></h5>
+            <h8>More stats</h8>
+            <p>42K</p>
+            <h8>More stats</h8>
+            <p>47.45%</p>
+        </div>
+      </aside>
+</div>
+
+    
+</body>
+</html>
