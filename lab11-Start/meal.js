@@ -8,6 +8,7 @@
 //https://www.themealdb.com/api/json/v1/1/search.php?s=
 
 const mealsElement = document.querySelector("#meals");
+const localStorageKey = 'mealsIds';
 
 getRandomMeal();
 
@@ -37,8 +38,48 @@ function addMeal(mealData)
                     <button class="fav-btn">
                         <i class="fas fa-heart"></i>
                     </button>
-                </div>`
+                </div>`;
+
+const favoriteButton = meal.querySelector(".fav-btn");
+if(favoriteButton) {
+
+    favoriteButton.addEventListener('click',() => {
+        if(favoriteButton.classList.contains("active")) {
+
+            favoriteButton.classList.remove("active");
+            removeMealfromLocalStorage(mealData.idMeal);
+
+        }
+
+        else {
+            favoriteButton.classList.add("active");
+           addMealToLocalStorage(mealData.idMeal);
+
+        }
+
+ })
+}
+
+
 
 
         mealsElement.appendChild(meal);
+}
+
+function addMealToLocalStorage(mealID) {
+    const mealsArray = getMealsFromLocalStorage();
+    localStorage.setItem(localStorageKey,JSON.stringify([...mealsArray,mealID]));
+}
+
+function removeMealfromLocalStorage(mealID) {
+    const mealsArray = getMealsFromLocalStorage();
+    localStorage.setItem(localStorageKey,JSON.stringify(   mealsArray.filter(id => id !== mealID))  );
+}
+
+function getMealsFromLocalStorage() {
+    const mealIds = JSON.parse(localStorage.getItem(localStorageKey));
+    if(mealIds === null)
+        return[];
+    else
+    return mealIds;
 }
