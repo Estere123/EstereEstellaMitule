@@ -176,6 +176,16 @@ nav ul li a:hover {
     max-width: 900px;
     margin: 0 auto;
 }
+
+.breed-content .fa-dog {
+    font-size: 24px;
+    margin-top: 10px;
+    transition: color 0.3s;
+}
+
+.breed-content .fa-dog:hover {
+    color: red;
+}
  .Image-container {
     width: 400px;
  }
@@ -199,6 +209,8 @@ nav ul li a:hover {
     justify-content: center;
     min-height: 300px;
 }
+
+
 
 
 .breed-info p {
@@ -228,8 +240,3 @@ nav ul li a:hover {
     }
 }
 
-.breed-section {
-    display: flex;
-    align-items: start;
-    margin-bottom: 20px;
-}
