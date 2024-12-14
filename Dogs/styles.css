@@ -33,7 +33,15 @@ body {
             z-index: 2;
 }
 
-.navigation {
+
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px;
     width: 100%;
     padding: 20px 0;
 }
@@ -57,6 +65,15 @@ nav ul li a {
 
 nav ul li a:hover {
     color: darkgray;
+}
+
+.hamburger {
+    background-color: transparent;
+    border: 0;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
 }
 
 .home-content{
@@ -90,6 +107,20 @@ nav ul li a:hover {
 }
 
 @media(max-width:768px) {
+ nav ul {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+}
+nav ul.show {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger {
+    display: block;
+}
+
 .home-content{ 
     padding: 1rem;
    
@@ -137,6 +168,18 @@ nav ul li a:hover {
     object-fit: cover;
 }
 
+@media (max-width) {
+    .vet-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .vet-card img {
+        width: 80%;
+        height: 80px;
+    }
+}
 
 
 .breed-container{
@@ -176,6 +219,16 @@ nav ul li a:hover {
     max-width: 900px;
     margin: 0 auto;
 }
+
+.breed-content .fa-dog {
+    font-size: 24px;
+    margin-top: 10px;
+    transition: color 0.3s;
+}
+
+.breed-content .fa-dog:hover {
+    color: red;
+}
  .Image-container {
     width: 400px;
  }
@@ -199,6 +252,8 @@ nav ul li a:hover {
     justify-content: center;
     min-height: 300px;
 }
+
+
 
 
 .breed-info p {
@@ -228,8 +283,63 @@ nav ul li a:hover {
     }
 }
 
-.breed-section {
+
+.searchsort {
     display: flex;
-    align-items: start;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 20px;
+    margin-right: 100px;
+    gap: 10px;
+}
+
+#sortVetBills {
+    background-color: lightgray;
+    border-color: black 2px;
+    transition: background-color 0.3s ease;
+    padding: 3px;
+}
+
+#sortVetBills:hover {
+    background-color: lightblue;
+}
+
+#slider  {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    overflow: hidden;
+}
+
+#slider img {
+    width: 100%;
+    display: none;
+    height: 600px;
+    object-fit: cover;
+}
+
+#slider img.active {
+    display: block;
+}
+
+.favorites-tittle {
+    text-align: center;
+    margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.favorites-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    gap: 5px;
+}
+
+.favorites-container img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
 }
