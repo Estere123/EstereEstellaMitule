@@ -1,23 +1,33 @@
-const hamburger = document.getElementById('hamburger');
-const navUL = document.querySelector('nav> ul');
-
-hamburger.addEventListener('click', () => {
-    navUL.classList.toggle('show');
-});
 const expensiveDogs = [
   { name: "German Shepherd", query: "germanshepherd", lifeExpectancy: 10, vetBills: "300$", commonDiseases: "Cancer" },
   { name: "Samoyed", query: "samoyed", lifeExpectancy: 12, vetBills: "250$", commonDiseases: "Hip dysplasia" },
-  { name: "Husky", query: "husky", lifeExpectancy: 13, vetBills: "200", commonDiseases: "Hip dysplasia" },
-  { name: "Mastiff", query: "mastiff", lifeExpectancy: 8, vetBills: "150", commonDiseases: "Hip dysplasia" },
-  { name: "English Mastiff", query: "mastiff/english", lifeExpectancy: 7, vetBills: "100", commonDiseases: "Hip dysplasia, Diabetes" },
+  { name: "Husky", query: "husky", lifeExpectancy: 13, vetBills: "200$", commonDiseases: "Hip dysplasia" },
+  { name: "Mastiff", query: "mastiff", lifeExpectancy: 8, vetBills: "150$", commonDiseases: "Hip dysplasia" },
+  { name: "English Mastiff", query: "mastiff/english", lifeExpectancy: 7, vetBills: "100$", commonDiseases: "Hip dysplasia, Diabetes" },
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const breedContainer = document.querySelector(".breed-container");
   const searchInput = document.getElementById("searchInput");
   const sortButton = document.querySelector("#sortVetBills");
+  const images = {};
+  let sortAscending = true;
+
+async function fetchImages() {
+  const promises = expensiveDogs.map(async dog => {
+    const imageLink = await getDogImage(dog);
+    images[dog.name] = imageLink;
+    return {...dog, imageLink};
+  });
+  const dogsWithImages = await Promise.all(promises);
+  updateBreedContainer(dogsWithImages);
+}
 
 
+function updateBreedContainer(dogs) {
+  breedContainer.innerHTML = "";
+  dogs.forEach(dog => addDog(dog, images[dog.name], breedContainer));
+}
 
 
 //Search by breed name
@@ -45,42 +55,21 @@ function filterByName(e) {
 
 
 sortButton.addEventListener("click", () => {
-const sorted = [...expensiveDogs].sort((a, b) => {
-  const aVetBills = parseInt(a.vetBills.replace("$").trim());
-  const bVetBills = parseInt(b.vetBills.replace("$").trim());
-  return aVetBills - bVetBills;
-});
-if (breedContainer) {
-  breedContainer.innerHTML="";
-  sorted.forEach(dog => getDogImages(dog));
-}
-
+  const sortedDogs = [...expensiveDogs].sort((a,b) => {
+    const aVetBills = parseInt(a.vetBills.replace("$", ""));
+    const bVetBills = parseInt(b.vetBills.replace("$", ""));
+    return sortAscending? aVetBills - bVetBills : bVetBills - aVetBills;
+  });
+  sortAscending = !sortAscending;
+  updateBreedContainer(sortedDogs)
 });
 
-expensiveDogs.forEach(dog => getDogImages(dog));
-
-});
-
-const favButtons = document.querySelector(".addFavorite");
-console.log(favButtons  )
-
-console.log("Script loaded and running");
-// localStorage.removeItem("favDogs");
-let favDogs = JSON.parse(localStorage.getItem("favDogs")) ?? [];
-
-if (!Array.isArray(favDogs)) {
-  favDogs = [];
-}
-
-console.log("Retrieved favDogs from local storage:", favDogs)
-
-
-
-async function getDogImages(dog) {
-  console.log('Dog object:', dog);
+async function getDogImage(dog) {
+ 
   if (!dog || !dog.query) {
     console.error
-      ('Invalid dog object or missing query property:', dog); return;
+      ('Invalid dog object or missing query property:', dog); 
+      return null;
   }
 
   const fetchUrl = `https://dog.ceo/api/breed/${dog.query}/images/random`;
@@ -90,18 +79,16 @@ async function getDogImages(dog) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
     const data = await response.json();
-    const imageLink = data.message;
+    return data.message;
 
-    console.log("RETURMED DOG : ",data)
-
-    addDog(dog, imageLink, ".breed-container");
+    
   } catch (error) {
     console.error('Error fetching dog image:', error);
+    return null;
   }
 }
 
-function addDog(dog, imageLink, containerSelector) {
-  const container = document.querySelector(containerSelector);
+function addDog(dog, imageLink, container) {
     const expensiveBreed = document.createElement("div");
   expensiveBreed.classList.add("breed");
 
@@ -113,16 +100,65 @@ function addDog(dog, imageLink, containerSelector) {
 </div> <div class="breed-info"> 
 <p>Average lifespan: ${dog.lifeExpectancy} years</p> 
 <p>Most common diseases: ${dog.commonDiseases}</p> 
-<p>Average vet bills: $100 ${dog.vetBills}</p> 
+<p>Average vet bills: ${dog.vetBills}</p> 
 <i class="addFavorite fa-solid fa-dog"></i> </div> 
 </div>`;
 
-
-
+const favoriteIcon = expensiveBreed.querySelector('.addFavorite');
+favoriteIcon.addEventListener('click', () => addFavorite(dog, imageLink));
   if (container) {
     container.appendChild(expensiveBreed);
   } else {
     console.error("Container not found")
   }
 }
+await fetchImages();
+});
+
+
+function getdogsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem('favorites')) || [];
+  
+}
+
+function addFavorite(dog, imageLink) {
+  const localStorageKey = 'favorites';
+  let favorites = getdogsFromLocalStorage();
+
+  const favoriteDog = {name:dog.name, imageLink: imageLink};
+  favorites.push(favoriteDog);
+  localStorage.setItem(localStorageKey, JSON.stringify(favorites));
+  displayFavorites();
+}
+
+function removeFavorite(dog) {
+let favorites = getdogsFromLocalStorage();
+favorites = favorites.filter(fav => fav.name !== dog.name);
+localStorage.setItem('favorites', JSON.stringify(favorites));
+displayFavorites();
+}
+
+function displayFavorites() {
+const favoriteContainer = document.querySelector('.favorites-container');
+if (favoriteContainer) {
+  favoriteContainer.innerHTML = '';
+  const favorites = getdogsFromLocalStorage();
+  favorites.forEach(dog => {
+    const dogElement = document.createElement('div');
+    dogElement.classList.add('breed');
+    dogElement.innerHTML = `
+    <div class="breed-content"> 
+<div class="Image-container">
+<h3>Breed name: ${dog.name}</h3> 
+<img src="${dog.imageLink}"> 
+<button class="clear"><i class="fas fa-window-close"></i></button>
+</div> 
+</div>`;
+const removeButton = dogElement.querySelector('.clear');
+removeButton.addEventListener('click', () => removeFavorite(dog));
+favoriteContainer.appendChild(dogElement);
+  });
+}
+}
+
 

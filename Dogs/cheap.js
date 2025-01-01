@@ -1,13 +1,3 @@
-const hamburger = document.getElementById('hamburger');
-const navUL = document.querySelector('nav> ul');
-
-hamburger.addEventListener('click', () => {
-    navUL.classList.toggle('show');
-});
-
-
-
-
 const cheapdogs = {
   cheapdogsDogsArray : [{ name: "Toy poodle", query: "poodle/toy", lifeExpectancy: 15, vetBills: "70$", commonDiseases: "Old age" },
                   { name: "Akita", query: "akita", lifeExpectancy: 17, vetBills: "50$", commonDiseases: "Old age" },
@@ -16,16 +6,35 @@ const cheapdogs = {
 };
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const breedContainer = document.querySelector(".breed-container");
     const searchInput = document.getElementById("searchInput");
     const sortButton = document.querySelector("#sortVetBills");
+    const images = {};
+    let sortAscending=true;
   
-    cheapdogs.cheapdogsDogsArray.forEach(dog => getDogImages(dog));
+    //cheapdogs.cheapdogsDogsArray.forEach(dog => getDogImages(dog));
   
   
+    async function fetchImages() {
+      const promises = cheapdogs.cheapdogsDogsArray.map(async dog => {
+        const imageLink = await getDogImages(dog);
+        images[dog.name] = imageLink;
+        return {...dog, imageLink};
+      });
+      const dogsWithImages = await Promise.all(promises);
+      updateBreedContainer(dogsWithImages);
+    }
+    
+    
+    function updateBreedContainer(dogs) {
+      breedContainer.innerHTML = "";
+      dogs.forEach(dog => addDog(dog, images[dog.name], ".breed-container"));
+    }
+    
+
+
+
   //Search by breed name
   
   
@@ -51,17 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   sortButton.addEventListener("click", () => {
-  const sorted = [...cheapdogs.cheapdogsDogsArray].sort((a, b) => {
-    const aVetBills = parseInt(a.vetBills.replace("$").trim());
-    const bVetBills = parseInt(b.vetBills.replace("$").trim());
-    return aVetBills - bVetBills;
+  const sortedDogs = [...cheapdogs.cheapdogsDogsArray].sort((a, b) => {
+    const aVetBills = parseInt(a.vetBills.replace("$", "").trim());
+    const bVetBills = parseInt(b.vetBills.replace("$", "").trim());
+    return sortAscending? aVetBills - bVetBills : bVetBills - aVetBills;
   });
-  if (breedContainer) {
-    breedContainer.innerHTML="";
-    sorted.forEach(dog => getDogImages(dog));
-  }
+  sortAscending = !sortAscending;
+  updateBreedContainer(sortedDogs)
+  });
   
-  });
+  fetchImages();
   displayFavorites();
 });
 
@@ -79,7 +87,7 @@ try {
     throw new Error(`HTTP error! status: ${response.status}`)
  }
  const data = await response.json();
- const imageLink = data.message;
+ return data.message;
  addDog(dog, imageLink, ".breed-container");
 }catch(error) {
     console.error('Error fetching dog images');
@@ -100,7 +108,7 @@ function addDog(dog, imageLink, containerSelector) {
   <div class="breed-info"> 
   <p>Average lifespan: ${dog.lifeExpectancy} years</p> 
   <p>Most common diseases: ${dog.commonDiseases}</p> 
-  <p>Average vet bills: $100 ${dog.vetBills}</p> 
+  <p>Average vet bills: ${dog.vetBills}</p> 
   <i class="addFavorite fa-solid fa-dog"></i> </div> 
   </div>`;
   
